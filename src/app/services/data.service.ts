@@ -14,9 +14,7 @@ export class DataService {
     return this.http.get<Product[]>(`${this.url}/products`);
   }
 
-  authenticate(
-    data: any // passei o parâmetro como ANY porque o TypeScript não deixava compilar
-  ) {
+  authenticate(data) {
     return this.http.post(`${this.url}/accounts/authenticate`, data);
   }
 }
