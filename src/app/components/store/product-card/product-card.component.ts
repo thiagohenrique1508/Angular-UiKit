@@ -1,3 +1,4 @@
+import { Product } from './../../../models/product.model';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -5,7 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './product-card.component.html',
 })
 export class ProductCardComponent implements OnInit {
-  @Input() product: any;
+  @Input()
+  product!: Product;
 
   constructor() {}
 
