@@ -6,9 +6,17 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class DataService {
+  public url = 'http://localhost:3000/v1';
+
   constructor(private http: HttpClient) {}
 
   getProducts() {
-    return this.http.get<Product[]>('http://localhost:3000/v1/products');
+    return this.http.get<Product[]>(`${this.url}/products`);
+  }
+
+  authenticate(
+    data: any // passei o parâmetro como ANY porque o TypeScript não deixava compilar
+  ) {
+    return this.http.post(`${this.url}/accounts/authenticate`, data);
   }
 }
