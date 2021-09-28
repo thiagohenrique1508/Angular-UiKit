@@ -31,4 +31,16 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  submit() {
+    this.service.authenticate(this.form.value).subscribe(
+      (data: any) => {
+        console.log(data);
+        localStorage.setItem('petshop.token', data.token);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
 }
