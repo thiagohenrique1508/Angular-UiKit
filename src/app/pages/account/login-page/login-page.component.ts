@@ -1,6 +1,8 @@
 import { DataService } from './../../../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CustomValidator } from 'src/app/validators/custom.validator';
 
 @Component({
   selector: 'app-login-page',
@@ -10,7 +12,11 @@ export class LoginPageComponent implements OnInit {
   public form: FormGroup;
   public busy = false;
 
-  constructor(private service: DataService, private fb: FormBuilder) {
+  constructor(
+    private router: Router,
+    private service: DataService,
+    private fb: FormBuilder
+  ) {
     this.form = this.fb.group({
       username: [
         '',
@@ -18,6 +24,7 @@ export class LoginPageComponent implements OnInit {
           Validators.minLength(14),
           Validators.maxLength(14),
           Validators.required,
+          CustomValidator.isCpf(),
         ]),
       ],
       password: [
