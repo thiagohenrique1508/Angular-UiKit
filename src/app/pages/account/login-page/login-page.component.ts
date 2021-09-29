@@ -15,8 +15,8 @@ export class LoginPageComponent implements OnInit {
       username: [
         '',
         Validators.compose([
-          Validators.minLength(11),
-          Validators.maxLength(11),
+          Validators.minLength(14),
+          Validators.maxLength(14),
           Validators.required,
         ]),
       ],
