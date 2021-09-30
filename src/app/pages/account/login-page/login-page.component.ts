@@ -1,3 +1,4 @@
+import { Security } from './../../../utils/security.util';
 import { DataService } from './../../../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -39,14 +40,14 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const token = localStorage.getItem('petshop.token');
+    const token = Security.getToken();
     if (token) {
       console.log('Autenticando Refresh...');
       this.busy = true;
       this.service.refreshToken().subscribe(
         (data: any) => {
-          localStorage.setItem('petshop.token', data.token);
           this.busy = false;
+          this.setUser(data.customer, data.token);
         },
         (err) => {
           localStorage.clear();
@@ -57,15 +58,21 @@ export class LoginPageComponent implements OnInit {
   }
 
   submit() {
+    this.busy = true;
     this.service.authenticate(this.form.value).subscribe(
       (data: any) => {
-        localStorage.setItem('petshop.token', data.token);
         this.busy = false;
+        this.setUser(data.customer, data.token);
       },
       (err) => {
         console.log(err);
         this.busy = false;
       }
     );
+  }
+
+  setUser(user, token) {
+    Security.set(user, token);
+    this.router.navigate(['/']);
   }
 }
