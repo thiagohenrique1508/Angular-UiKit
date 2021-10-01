@@ -1,3 +1,5 @@
+import { AuthService } from './services/auth.service';
+import { DataService } from './services/data.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -38,7 +40,7 @@ import { MaskDirective } from './directives/mask.directive';
     HttpClientModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [DataService, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
